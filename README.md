@@ -42,6 +42,7 @@ python
     "average_price", "promotions", "emails_send", "sms_send"
 ]
 >>> plot_predictions(df, revenue_model, features)  # Generates prediction plot in the PNG format
+![Revenue Predictions](media/OutputFigures.png)
 ```
 
 
