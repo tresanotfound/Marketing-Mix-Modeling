@@ -15,6 +15,35 @@ python -m venv venv                        # Create virtual environment
 venv\Scripts\activate                     # Activate virtual environment
 pip install -r requirements.txt            # Install dependencies
 ```
+## Running the Project
+Once the code files are created, verification of whether the code is working or not can be verified by typing 'python', so that python shell will be opened. 
+```python
+python
+>>> from src.data_prep import load_data, preprocess
+>>> from src.mediator import stage1_google_model
+>>> from src.modeling import train_revenue_model
+>>> from src.evaluation import plot_predictions
+
+# Load and preprocess data
+>>> df = load_data("data/Assessment2_MMMWeekly.csv")
+>>> df = preprocess(df)
+
+# Stage 1: Google as mediator
+>>> google_model, df = stage1_google_model(df)
+
+# Train revenue model
+>>> revenue_model, mse = train_revenue_model(df)
+>>> print("Revenue model MSE:", mse)
+
+# Define features and plot predictions
+>>> features = [
+    "google_spend_pred", "facebook_spend", "tiktok_spend",
+    "instagram_spend", "snapchat_spend", "social_followers",
+    "average_price", "promotions", "emails_send", "sms_send"
+]
+>>> plot_predictions(df, revenue_model, features)  # Generates prediction plot in the PNG format
+```
+
 
 ### Git Commands Used
 ```bash
@@ -46,33 +75,6 @@ marketing_modelling/
 ├── requirements.txt               # Python dependencies
 ├── README.md
 └── venv/                           # Virtual environment
-```
-
-## Running the Project
-```python
-from src.data_prep import load_data, preprocess
-from src.mediator import stage1_google_model
-from src.modeling import train_revenue_model
-from src.evaluation import plot_predictions
-
-# Load and preprocess data
-df = load_data("data/Assessment2_MMMWeekly.csv")
-df = preprocess(df)
-
-# Stage 1: Google as mediator
-google_model, df = stage1_google_model(df)
-
-# Train revenue model
-revenue_model, mse = train_revenue_model(df)
-print("Revenue model MSE:", mse)
-
-# Define features and plot predictions
-features = [
-    "google_spend_pred", "facebook_spend", "tiktok_spend",
-    "instagram_spend", "snapchat_spend", "social_followers",
-    "average_price", "promotions", "emails_send", "sms_send"
-]
-plot_predictions(df, revenue_model, features)  # Generates prediction plot PNG file
 ```
 
 ### Context
