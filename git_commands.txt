@@ -1,12 +1,1 @@
-cd /c/Users/trees/marketing_modelling   # Navigate to the project folder
-git init                                # Initialize a new Git repository in the folder
-nano .gitignore                         # Open nano editor to create a .gitignore file
-git add .                               # Stage all files for commit
-git commit -m "Initial commit"          # Commit the staged files with a message
-git remote add origin https://github.com/tresanotfound/Marketing-Mix-Modeling.git  
-                                        # Link local repo to remote GitHub repo
-git branch -M main                      # Rename current branch to 'main'
-git branch --set-upstream-to=origin/main main  
-                                        # Set upstream tracking to remote 'main' branch
-git pull --rebase                       # Pull and rebase any remote changes to local branch
-git push                                # Push local commits to the GitHub repository
+
