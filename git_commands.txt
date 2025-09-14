@@ -1,0 +1,4 @@
+trees@Treesa_Geo MINGW64 ~
+$ cd /c/Users/trees/marketing_modelling
+
+
