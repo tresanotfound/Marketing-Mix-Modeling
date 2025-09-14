@@ -1,0 +1,35 @@
+## **Marketing Mix Modeling (MMM) Short Write-Up**
+
+### **1. Data Preparation**
+The weekly dataset was preprocessed to handle seasonality, trend, and sparsity:
+* **Seasonality & trend:** Rolling averages and seasonal differencing were applied to remove weekly fluctuations and highlight underlying trends.
+* **Zero-spend periods:** Weeks with zero media spend were retained and flagged to avoid biasing the model while capturing realistic campaign gaps.
+* **Feature scaling & transformations:** Continuous variables were normalized; skewed metrics like social followers and direct response counts were log-transformed to improve model stability.
+
+### **2. Modeling Approach**
+A **two-stage regularized regression** framework was used:
+* **Stage 1:** Google spend was modeled as a function of other social media channels (Facebook, TikTok, Snapchat) to capture its role as a mediator.
+* **Stage 2:** Revenue was predicted using predicted Google spend, other media spends, promotions, pricing, and direct response variables.
+* **Hyperparameters & feature selection:** Ridge and Lasso regularization controlled overfitting and collinearity; cross-validation was used to tune alpha and identify influential features.
+* **Validation:** Rolling-window cross-validation preserved temporal ordering, preventing look-ahead bias.
+
+### **3. Causal Framing**
+Google spend was explicitly treated as a mediator between social media activity and revenue:
+* Two-stage modeling separates direct effects (social media → Google) from mediated effects (Google → Revenue).
+* Feature design controlled back-door paths and avoided leakage of future revenue information.
+* This framework ensures causal interpretability while maintaining predictive power.
+
+### **4. Diagnostics**
+* **Out-of-sample performance:** Model MSE and R² were computed on holdout periods.
+* **Stability checks:** Rolling/blocked cross-validation confirmed consistent performance across time windows.
+* **Residual analysis:** Residual plots verified no systematic patterns, confirming model adequacy.
+* **Sensitivity analysis:** Revenue predictions were evaluated against variations in Average Price and Promotions to measure elasticity and promotional lift.
+
+### **5. Insights & Recommendations**
+* **Key drivers:** Predicted Google spend, promotions, and pricing strongly influence revenue; email and SMS campaigns provide smaller incremental effects.
+* **Risks:** Collinearity among social channels and mediated effects require careful interpretation; over-reliance on historical promotion patterns may reduce robustness.
+* **Recommendations:**
+  * Optimize social media spend to balance direct and mediated effects.
+  * Design promotions strategically to avoid diminishing returns.
+  * Leverage email/SMS for targeted retention campaigns rather than broad acquisition.
+
